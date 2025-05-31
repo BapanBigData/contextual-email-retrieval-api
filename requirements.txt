@@ -1,0 +1,17 @@
+numpy
+pandas
+transformers>=4.39.0
+torch>=2.2.0
+python-docx 
+chromadb 
+sentence-transformers 
+ollama
+fastapi
+uvicorn
+pydantic
+requests
+langchain-community
+langchain-ollama
+faiss-cpu 
+langchain
+ipykernel 
