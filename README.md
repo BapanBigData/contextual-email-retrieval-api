@@ -38,7 +38,8 @@ contextual-email-retrieval-api/
 │   ├── dataset_exploration_and_preprocessing.ipynb  # Task 1
 │   ├── email_summarization.ipynb                    # Task 2
 │   └── response_generation_task.ipynb               # Task 3 
-│
+│   |-- model_evaluation.ipynb                       # Task 4
+|
 ├── requirements.txt
 ├── .gitignore
 └── README.md
@@ -84,7 +85,7 @@ contextual-email-retrieval-api/
   - Relevance
   - Fluency
   - Alignment with context
-- All evaluation and debugging steps logged in the notebook.
+- All evaluations and thoughts are disscussed on `notebooks/model_evaluation.ipynb`.
 
 
 ---
