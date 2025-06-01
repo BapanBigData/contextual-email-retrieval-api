@@ -1,4 +1,4 @@
-# 📬 Enron Email Response Generator & Summarizer (GenAI Assignment)
+# 📬 Enron Email Response Generator & Summarizer (Data Science and Generative AI Assignment)
 
 This repository contains the solution to the **TATA Communications Data Science & GenAI Assignment**. The objective was to build an intelligent system that performs **email summarization**, **response generation**, and **API deployment** using **Retrieval-Augmented Generation (RAG)** and **locally hosted LLMs via Ollama** on the Enron email dataset.
 
