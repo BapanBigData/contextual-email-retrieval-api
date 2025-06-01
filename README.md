@@ -21,14 +21,14 @@ We approached the assignment in five tasks:
 ## 📂 Directory Structure
 
 ```bash
-email-ai-summarizer/
+contextual-email-retrieval-api/
 │
 ├── app/                           # ✅ Task 5: FastAPI app (modular)
-├── config/                        # Shared paths and settings
-├── engine/                        # Embedding, vector store, prompt templates
-├── models/                        # Pydantic models/schemas
-├── routers/                       # API routes (summarization, response)
-│
+├     config/                        # Shared paths and settings
+├     engine/                        # Embedding, vector store, prompt templates
+├     models/                        # Pydantic models/schemas
+├     routers/                       # API routes (summarization, generations)
+│     main.py  
 ├── data/
 │   └── filtered_enron_emails.csv  # Filtered emails (based on email types, not length)
 │
@@ -37,40 +37,45 @@ email-ai-summarizer/
 ├── notebooks/                     # Jupyter Notebooks for Tasks 1–4
 │   ├── dataset_exploration_and_preprocessing.ipynb  # Task 1
 │   ├── email_summarization.ipynb                    # Task 2
-│   └── response_generation_task.ipynb               # Task 3 & 4
+│   └── response_generation_task.ipynb               # Task 3 
 │
 ├── requirements.txt
 ├── .gitignore
 └── README.md
 
-## ✅ Tasks Summary
+
+## **✅ Tasks Summary**
 
 ### 🔍 Task 1: Dataset Exploration & Preprocessing
 - Performed initial analysis on the Enron dataset.
+
 - Identified **relevant email topics** such as:
-  - 📅 Meeting Requests
-  - 📌 Project Updates
-  - 📈 Status Follow-ups
+  - Meeting Requests
+  - Project Updates
+  - Status Follow-ups
+
 - Filtered and saved emails under `filtered_enron_emails.csv`.
-- 📌 **Filtering was based on email types, not character length.**
+- **Filtering was based on email types**
+- Implemented within `notebooks/dataset_exploration_and_preprocessing.ipynb`
 
 ---
 
 ### ✂️ Task 2: Email Summarization
-- Utilized locally hosted LLMs (via **Ollama**) to generate **concise summaries**.
+- Utilized locally pre-trained LLMs such as `bart-large-cnn`, `pegasus-xsum` to generate **concise summaries**.
 - Focused on clarity, relevance, and capturing essential intent.
-- Implemented within `email_summarization.ipynb`.
+- Implemented within `notebooks/email_summarization.ipynb`.
 
 ---
 
 
 ### 💬 Task 3: Contextual Response Generation (RAG)
-- Built a RAG pipeline using:
+- Built a RAG-based Response Generation using:
   - **Ollama** for embedding + generation
   - **FAISS** for semantic document retrieval
-- Only used emails with **length ≥ 500 characters** as single chunks (no overlap).
-- Vector store built using `chromadb`.
-- Integrated in `response_generation_task.ipynb`.
+
+- Only used emails with **length ≥ 500 characters** as single chunks (with 50 overlap).
+- Vector store built using `faiss-index`.
+- Implemented within `notebooks/response_generation_task.ipynb`.
 
 ---
 
@@ -89,13 +94,37 @@ email-ai-summarizer/
 - Deployed using **FastAPI** with a **modular architecture**.
 - Organized under `/app` directory.
 - API endpoints support:
-  - `/summarize` - Summarize email body
-  - `/respond` - Generate email reply based on context
+  - `/generate-email-response` - Generate emails based on context
 
 
 ## ⚙️ Environment & Setup
 
 - **Python Version**: 3.12.0
+
+
+## ⚠️ Important Notes
+
+| **Item**                              | **Status**                  |
+|---------------------------------------|-----------------------------|
+| `data/emails.csv` (original dataset)  | ❌ Not pushed to Git        |
+| `faiss_index/`                        | ❌ Not included in Git      |
+| `data/filtered_enron_emails.csv`      | ❌ Not included in Git      |
+
+
+## 🧱 How to Rebuild the RAG Pipeline
+
+1. **Clone the repository and install dependencies:**
+
+```bash
+
+git clone <repo-url>
+cd contextual-email-retrieval-api
+
+- Create a venv 
+  - conda create -p venv python==3.12.0
+
+- Activate venv
+  - source activate venv/
 
 - 📦 Install requirements:
 
@@ -107,25 +136,6 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 
 
-## ⚠️ Important Notes
-
-| **Item**                      | **Status**                                 |
-|------------------------------|---------------------------------------------|
-| `data/emails.csv` (original dataset) | ❌ Not pushed to Git                     |
-| `faiss_index/`                 | ❌ Not included in Git                    |
-| `data/filtered_enron_emails.csv`   | ❌ Not included in Git      |
-
-
-## 🧱 How to Rebuild the RAG Pipeline
-
-1. **Clone the repository and install dependencies:**
-
-```bash
-git clone <repo-url>
-cd email-ai-summarizer
-pip install -r requirements.txt
-
-
 ## 🏁 Final Thoughts
 
 This solution demonstrates how **GenAI** and **local LLMs** can be effectively used for:
@@ -133,3 +143,13 @@ This solution demonstrates how **GenAI** and **local LLMs** can be effectively u
 - Intelligent summarization  
 - Context-aware response generation  
 - Scalable deployment using APIs  
+
+
+## 🔮 Future Enhancements
+- Move from in-memory to scalable NoSQL vector DBs
+
+- Use high-end GPU machines to accelerate embedding creation
+
+- Integrate more advanced LLMs and text-embedding models
+
+- Deploy APIs to the cloud for broader business use cases
