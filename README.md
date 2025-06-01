@@ -29,10 +29,10 @@ contextual-email-retrieval-api/
 ├     models/                        # Pydantic models/schemas
 ├     routers/                       # API routes (summarization, generations)
 │     main.py  
-├── data/
-│   └── filtered_enron_emails.csv  # Filtered emails (based on email types, not length)
+├── data/                           # this dir is excluded from git
+│   └── filtered_enron_emails.csv  # Filtered emails (based on email types)
 │
-├── faiss_index/                   # 🔒 FAISS vector index (excluded from Git)
+├── faiss_index/                   # FAISS vector index (excluded from Git)
 │
 ├── notebooks/                     # Jupyter Notebooks for Tasks 1–4
 │   ├── dataset_exploration_and_preprocessing.ipynb  # Task 1
@@ -94,7 +94,7 @@ contextual-email-retrieval-api/
 - Deployed using **FastAPI** with a **modular architecture**.
 - Organized under `/app` directory.
 - API endpoints support:
-  - `/generate-email-response` - Generate emails based on context
+  - `/generate-email-response` -  Generate responses for common email types. 
 
 
 ## ⚙️ Environment & Setup
@@ -111,7 +111,7 @@ contextual-email-retrieval-api/
 | `data/filtered_enron_emails.csv`      | ❌ Not included in Git      |
 
 
-## 🧱 How to Rebuild the RAG Pipeline
+## 🧱 How to Rebuild this project
 
 1. **Clone the repository and install dependencies:**
 
